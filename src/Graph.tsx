@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from '@finos/perspective';
+import { Table, TableData } from '@finos/perspective';
 import { ServerRespond } from './DataStreamer';
 import { DataManipulator } from './DataManipulator';
 import './Graph.css';
@@ -27,9 +27,9 @@ class Graph extends Component<IProps, {}> {
       price_def: 'float',
       ratio: 'float',
       timestamp: 'date',
-        upper_bound: 'float',
+      upper_bound: 'float',
       lower_bound: 'float',
-       trigger_alert: 'float'
+       trigger_alert: 'float',
     };
 
     if (window.perspective && window.perspective.worker()) {
@@ -55,7 +55,7 @@ class Graph extends Component<IProps, {}> {
 
   componentDidUpdate() {
     if (this.table) {
-      this.table.update([
+      this.table.update( [
         DataManipulator.generateRow(this.props.data),
         ] as unknown as TableData);
     }
